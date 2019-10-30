@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GPA Report</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+            integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src='js/export.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.4/jspdf.plugin.autotable.min.js"></script>
+    <script src="jspdf.plugin.autotable.min.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css"/>
+    </noscript>
+
+    <script>
+        function makePDF() {
+    var doc = new jsPDF();
+    // It can parse html:
+    doc.autoTable({html: '#table-1'});
+    doc.autoTable({html: '#table-2'});
+    doc.autoTable({html: '#table-3'});
+
+    doc.save('table.pdf');
+    }
+
+
+
+
+
+    </script>
+
+
+    <script>
+        function getPDF(divid,name) {
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    var pdf_name = 'GPAReport_'+name+'.pdf';
+
+    htmlsource = $('#'+divid)[0];
+
+
+    specialElementHandlers = {
+        // element with id of "bypass" - jQuery style selector
+        '#bypassme': function (element, renderer) {
+            // true = "handled elsewhere, bypass text extraction"
+            return true
+        }
+    };
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 700
+    };
+
+    pdf.fromHTML(
+    htmlsource, // HTML string or DOM elem ref.
+    margins.left, // x coord
+    margins.top, { // y coord
+        'width': margins.width, // max width of content on PDF
+        'elementHandlers': specialElementHandlers
+    },
+
+    function (dispose) {
+        pdf.save(pdf_name);
+    }, margins);
+}
+
+
+
+    </script>
+
+
+</head>
+<body class="is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1 id="logo"><a href="index.html">GPA Report</a></h1>
+
+    </header>
+
+    <!-- Main -->
+    <div id="main" class="wrapper style1">
+        <div class="container">
+
+
+            <!-- Text -->
+            <section>
+                <h3>KuGPA'e hoşgeldin!</h3>
+                <p>Merhaba <i><b th:text="${nameSurname}"></b></i> Aşağıdaki tablolarda, Kümülatif GPA'ini, her döneme
+                    göre SPA bilgilerini
+                    ve döneme göre sıralanmış şekilde tüm ders notlarını, kredisini ve GPA' hesaplamasına dahil olup
+                    olmadığını görebilirsin.</p>
+
+
+                <blockquote> Umarım beğenirsin, iyi haftalar ! :)</blockquote>
+
+
+                <div id="content">
+                    <!-- Table -->
+                    <section class="printable">
+                        <button onclick="getPDF('content','${nameSurname}')">PDF</button>
+                        <button onclick="javascript:makePDF()">PDF</button>
+
+                        <div class="table-wrapper">
+
+
+                            <h4>GPA</h4>
+
+                            <table class="basic-table" id="basic-table">
+                                <thead>
+                                <tr>
+                                    <th>CUMULATIVE GPA</th>
+                                    <th>TOTAL CREDITS INCLUDED</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <td><span
+                                        th:text="${gpa}">  </span></td>
+                                <td><span
+                                        th:text="${totalCredit}"> </span></td>
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+
+                            <h4>SPA For Each Term</h4>
+
+                            <table class="basic-table">
+                                <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>SPA</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <tr th:each="term: ${termIncluded}">
+                                    <td><span
+                                            th:text="${term}"> Term </span></td>
+                                    <td><span
+                                            th:text="${SPAList.get(term)}"> SPA</span></td>
+                                </tr>
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td><span
+                                    > CUMULATIVE GPA </span></td>
+
+                                    <td><span
+                                            th:text="${gpa}"></span></td>
+
+                                </tr>
+                                </tfoot>
+                            </table>
+
+
+                            <table class="basic-table" th:each="term: ${terms}">
+                                <h4 th:text="${term}">Term : </h4>
+                                <thead>
+                                <tr>
+
+                                    <th>Course
+                                        Name
+                                    </th>
+                                    <th>Course
+                                        Code
+                                    </th>
+
+                                    <th>Grade</th>
+                                    <th>Credit</th>
+                                    <th>IncludedInGpa</th>
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+
+
+                                <tr th:each="course : ${courseList.get(term)}">
+
+                                    <td><span
+                                            th:text="${course.CourseName}"> Course Name </span></td>
+                                    <td><span
+                                            th:text="${course.CourseCode}"> Code</span></td>
+
+
+                                    <td><span
+                                            th:text="${course.Grade}">Grade </span></td>
+                                    <td><span
+                                            th:text="${course.CourseCredit}"> Credit </span></td>
+                                    <td><span
+                                            th:text="${course.includedInGPA}"> Included In Gpa </span></td>
+
+
+                                </tr>
+
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td> <span
+                                            th:text="${term}">SPA for Term </span></td>
+
+                                    <td colspan="3"></td>
+                                    <td><span
+                                            th:text="${SPAList.get(term)}"> SPA </span></td>
+                                </tr>
+
+                                </tfoot>
+                            </table>
+
+                        </div>
+
+                    </section>
+                </div>
+
+                <!-- Buttons -->
+                <section>
+                    <h3>Buttons</h3>
+                    <ul class="actions">
+                        <li><a href="#" class="button primary">Primary</a></li>
+                        <li><a href="#" class="button">Default</a></li>
+                    </ul>
+                    <ul class="actions">
+                        <li><a href="#" class="button primary large">Large</a></li>
+                        <li><a href="#" class="button">Default</a></li>
+                        <li><a href="#" class="button small">Default</a></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-6 col-12-xsmall">
+                            <ul class="actions fit">
+                                <li><a href="#" class="button primary fit">Fit</a></li>
+                                <li><a href="#" class="button fit">Fit</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <ul class="actions fit small">
+                                <li><a href="#" class="button primary fit small">Fit + Small</a></li>
+                                <li><a href="#" class="button fit small">Fit + Small</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+                        <li><a href="#" class="button icon solid fa-download">Icon</a></li>
+                    </ul>
+                    <ul class="actions">
+                        <li><span class="button primary disabled">Primary</span></li>
+                        <li><span class="button disabled">Default</span></li>
+                    </ul>
+                </section>
+
+
+                <!-- Form -->
+                <section>
+                    <h3>Form</h3>
+                    <form method="post" action="#">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-6 col-12-xsmall">
+                                <input type="text" name="name" id="name" value="" placeholder="Name"/>
+                            </div>
+                            <div class="col-6 col-12-xsmall">
+                                <input type="email" name="email" id="email" value="" placeholder="Email"/>
+                            </div>
+                            <div class="col-12">
+                                <select name="category" id="category">
+                                    <option value="">- Category -</option>
+                                    <option value="1">Manufacturing</option>
+                                    <option value="1">Shipping</option>
+                                    <option value="1">Administration</option>
+                                    <option value="1">Human Resources</option>
+                                </select>
+                            </div>
+                            <div class="col-4 col-12-medium">
+                                <input type="radio" id="priority-low" name="priority" checked>
+                                <label for="priority-low">Low Priority</label>
+                            </div>
+                            <div class="col-4 col-12-medium">
+                                <input type="radio" id="priority-normal" name="priority">
+                                <label for="priority-normal">Normal Priority</label>
+                            </div>
+                            <div class="col-4 col-12-medium">
+                                <input type="radio" id="priority-high" name="priority">
+                                <label for="priority-high">High Priority</label>
+                            </div>
+                            <div class="col-6 col-12-medium">
+                                <input type="checkbox" id="copy" name="copy">
+                                <label for="copy">Email me a copy of this message</label>
+                            </div>
+                            <div class="col-6 col-12-medium">
+                                <input type="checkbox" id="human" name="human" checked>
+                                <label for="human">I am a human and not a robot</label>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" id="message" placeholder="Enter your message"
+                                          rows="6"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li><input type="submit" value="Send Message" class="primary"/></li>
+                                    <li><input type="reset" value="Reset"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Image -->
+                <section>
+                    <h3>Image</h3>
+                    <h4>Fit</h4>
+                    <div class="box alt">
+                        <div class="row gtr-50 gtr-uniform">
+                            <div class="col-12"><span class="image fit"><img src="images/pic07.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic02.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic03.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic04.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic04.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic02.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic03.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic03.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic04.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic02.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic02.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic03.jpg" alt=""/></span>
+                            </div>
+                            <div class="col-4 col-6-xsmall"><span class="image fit"><img src="images/pic04.jpg" alt=""/></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Left &amp; Right</h4>
+                    <p><span class="image left"><img src="images/pic08.jpg" alt=""/></span>Fringilla nisl. Donec
+                        accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante
+                        ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing
+                        accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus
+                        euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
+                        iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec
+                        accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante
+                        ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing
+                        accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus
+                        euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
+                        iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Cras
+                        aliquet accumsan curae accumsan arcu amet egestas placerat odio morbi mi adipiscing col morbi
+                        felis faucibus in gravida sollicitudin interdum commodo. Ante aliquam vis iaculis accumsan lorem
+                        ipsum dolor sit amet nullam. Cras aliquet accumsan curae accumsan arcu amet egestas placerat
+                        odio morbi mi adipiscing col morbi felis faucibus in gravida sollicitudin interdum commodo. Ante
+                        aliquam vis iaculis accumsan lorem ipsum dolor sit amet nullam.</p>
+                    <p><span class="image right"><img src="images/pic08.jpg" alt=""/></span>Fringilla nisl. Donec
+                        accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante
+                        ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing
+                        accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus
+                        euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
+                        iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec
+                        accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante
+                        ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing
+                        accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus
+                        euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
+                        iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Cras
+                        aliquet accumsan curae accumsan arcu amet egestas placerat odio morbi mi adipiscing col morbi
+                        felis faucibus in gravida sollicitudin interdum commodo. Ante aliquam vis iaculis accumsan lorem
+                        ipsum dolor sit amet nullam. Cras aliquet accumsan curae accumsan arcu amet egestas placerat
+                        odio morbi mi adipiscing col morbi felis faucibus in gravida sollicitudin interdum commodo. Ante
+                        aliquam vis iaculis accumsan lorem ipsum dolor sit amet nullam.</p>
+                </section>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <ul class="copyright">
+            <li>&copy; Untitled. All rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
