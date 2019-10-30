@@ -318,6 +318,20 @@ public class Student {
 
     }
 
+    public ArrayList<String> getNonNullSPATerms() {
+
+        ArrayList<String> termList = new ArrayList<String>();
+        HashMap<String, Float> SPAMap = this.getSPAForAll();
+
+        for (String term : SPAMap.keySet()) {
+            if (SPAMap.get(term).toString().equals("NaN")) {
+                termList.remove(term);
+            }
+
+        }
+        return termList;
+    }
+
     @Override
     public String toString() {
 

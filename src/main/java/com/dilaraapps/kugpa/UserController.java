@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
 
 @Controller
 public class UserController {
@@ -55,22 +50,13 @@ public class UserController {
 
             current = gpaCalculator.getStudent(user.getUsername(), user.getPassw());
             // System.out.println(current.getSPAForAll().keySet().toString());
-            ArrayList<String> termList = current.getTerms();
-
-            HashMap<String, Float> SPAMap = current.getSPAForAll();
-            Map<String, Float> sortedMap = new TreeMap<>();
-            for (String term : current.getSPAForAll().keySet()) {
-                if (SPAMap.get(term).toString().equals("NaN")) {
-                    termList.remove(term);
-                }
-            }
-
+            
 
             model.addAttribute("courses", current.getCoursesTaken());
             model.addAttribute("nameSurname", current.getNameSurname());
             model.addAttribute("courseList", current.getCoursesPerTerm());// Hashmap<String,List<Course>>
             model.addAttribute("SPAList", current.getSPAForAll()); //HashMap <String,Float>
-            model.addAttribute("termIncluded", termList); //ArrayList -String
+            model.addAttribute("termIncluded", current.getNonNullSPATerms()); //ArrayList -String
             model.addAttribute("terms", current.getTerms()); //ArrayList -String
             model.addAttribute("gpa", current.getCumulativeGPA());
             model.addAttribute("totalCredit", current.getTotalCredits());
