@@ -7,10 +7,6 @@ import java.util.HashMap;
 
 public class Course {
 
-
-    HashMap<String, Float> gradeMap = new HashMap<String, Float>();
-
-
     String CourseName;
     String CourseCode;
     String CourseTerm;
@@ -21,30 +17,7 @@ public class Course {
 
 
     public Course(String name, String code, String term, String Grade, String Credit, String included) {
-        gradeMap.put("A+", (float) 4.3);
-        gradeMap.put("A", (float) 4.0);
-        gradeMap.put("A-", (float) 3.7);
-        gradeMap.put("B+", (float) 3.3);
-        gradeMap.put("B", (float) 3.0);
-        gradeMap.put("B-", (float) 2.7);
-        gradeMap.put("C+", (float) 2.3);
-        gradeMap.put("C", (float) 2.0);
-        gradeMap.put("C-", (float) 1.7);
-        gradeMap.put("D+", (float) 1.3);
-        gradeMap.put("D", (float) 1.0);
-        gradeMap.put("F", (float) 0);
-        gradeMap.put("TA+", (float) 4.3);
-        gradeMap.put("TA", (float) 4.0);
-        gradeMap.put("TA-", (float) 3.7);
-        gradeMap.put("TB+", (float) 3.3);
-        gradeMap.put("TB", (float) 3.0);
-        gradeMap.put("TB-", (float) 2.7);
-        gradeMap.put("TC+", (float) 2.3);
-        gradeMap.put("TC", (float) 2.0);
-        gradeMap.put("TC-", (float) 1.7);
-        gradeMap.put("TD+", (float) 1.3);
-        gradeMap.put("TD", (float) 1.0);
-        gradeMap.put("TF", (float) 0);
+
 
 
         this.CourseName = name;
@@ -59,13 +32,9 @@ public class Course {
 
 
     public HashMap<String, Float> getGradeMap() {
-        return gradeMap;
+        return ProjectConstants.getInstance().getGradeMap();
     }
 
-
-    public void setGradeMap(HashMap<String, Float> gradeMap) {
-        this.gradeMap = gradeMap;
-    }
 
 
     public String getCourseName() {
@@ -138,6 +107,7 @@ public class Course {
 
 
     public Float getNumericalValueOfGrade() {
+        HashMap<String, Float> gradeMap = getGradeMap();
         if (gradeMap.containsKey(this.Grade)) {
             return gradeMap.get(Grade);
         } else return null;
