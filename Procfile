@@ -1,0 +1,1 @@
+web: java -jar target/kugpa-0.0.1.jar
