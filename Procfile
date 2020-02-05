@@ -1,1 +1,1 @@
-web: java -jar target/kugpa-0.0.1.jar
+web: java -jar /out/artifacts/kugpa_jar/kugpa.jar
