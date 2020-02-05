@@ -49,7 +49,7 @@ public class KUGPAGetGradesController {
 
     }
 
-    @PostMapping(value ="/loginU")
+    @PostMapping("/loginU")
     public ResponseEntity<Student> loginUser(@RequestBody User user) {
 
         Student current = null;
