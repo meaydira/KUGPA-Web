@@ -18,7 +18,7 @@ public class UserController {
 	}*/
 
 
-    @Autowired
+
     public UserController(GpaCalculator gpaCalculator) {
         super();
         this.gpaCalculator = gpaCalculator;
@@ -50,7 +50,7 @@ public class UserController {
 
             current = gpaCalculator.getStudent(user.getUsername(), user.getPassw());
             // System.out.println(current.getSPAForAll().keySet().toString());
-            
+
 
             model.addAttribute("courses", current.getCoursesTaken());
             model.addAttribute("nameSurname", current.getNameSurname());

@@ -83,7 +83,8 @@ input, select, textarea {
 	}
 
 	html, body {
-		background: #1c1d26;
+		background:rgba(255, 255, 255, 0.75);
+
 	}
 
 	body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -98,7 +99,7 @@ input, select, textarea {
 	}
 
 	body, input, select, textarea {
-		color: rgba(255, 255, 255, 0.75);
+		color: #1c1d26;
 		font-family: "Roboto", Helvetica, sans-serif;
 		font-size: 15pt;
 		font-weight: 100;
@@ -121,7 +122,7 @@ input, select, textarea {
 		}
 
 	strong, b {
-		color: #ffffff;
+		color: #1c1d26;
 		font-weight: 300;
 	}
 
@@ -134,7 +135,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+		color: #1c1d26;
 		font-weight: 300;
 		line-height: 1em;
 		margin: 0 0 1em 0;
@@ -279,7 +280,7 @@ input, select, textarea {
 
 	@-moz-keyframes spinner-hide {
 		0% {
-			color: rgba(255, 255, 255, 0.15);
+			color: #1c1d26;
 			z-index: 100001;
 			-moz-transform: scale(1) rotate(0deg);
 			-webkit-transform: scale(1) rotate(0deg);
@@ -288,7 +289,7 @@ input, select, textarea {
 		}
 
 		99% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: 100001;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -297,7 +298,7 @@ input, select, textarea {
 		}
 
 		100% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: -1;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -308,7 +309,7 @@ input, select, textarea {
 
 	@-webkit-keyframes spinner-hide {
 		0% {
-			color: rgba(255, 255, 255, 0.15);
+			color: #1c1d26;
 			z-index: 100001;
 			-moz-transform: scale(1) rotate(0deg);
 			-webkit-transform: scale(1) rotate(0deg);
@@ -317,7 +318,7 @@ input, select, textarea {
 		}
 
 		99% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: 100001;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -326,7 +327,7 @@ input, select, textarea {
 		}
 
 		100% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: -1;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -346,7 +347,7 @@ input, select, textarea {
 		}
 
 		99% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: 100001;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -355,7 +356,7 @@ input, select, textarea {
 		}
 
 		100% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: -1;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -375,7 +376,7 @@ input, select, textarea {
 		}
 
 		99% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: 100001;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -384,7 +385,7 @@ input, select, textarea {
 		}
 
 		100% {
-			color: #1c1d26;
+			color: #ffffff;
 			z-index: -1;
 			-moz-transform: scale(0.5) rotate(360deg);
 			-webkit-transform: scale(0.5) rotate(360deg);
@@ -593,7 +594,7 @@ input, select, textarea {
 			-webkit-animation: overlay-hide 1.5s ease-in forwards !important;
 			-ms-animation: overlay-hide 1.5s ease-in forwards !important;
 			animation: overlay-hide 1.5s ease-in forwards !important;
-			background: #1c1d26;
+			background: #ffffff;
 			content: '';
 			display: block;
 			height: 100%;
@@ -2154,7 +2155,7 @@ input, select, textarea {
 	}
 
 	header p {
-		color: #ffffff;
+		color: #1c1d26;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -2211,7 +2212,7 @@ input, select, textarea {
 		}
 
 	label {
-		color: #ffffff;
+		color: #1c1d26;
 		display: block;
 		font-size: 0.9em;
 		font-weight: 300;
@@ -2758,7 +2759,7 @@ input, select, textarea {
 	}
 
 	table {
-		margin: 0 0 2em 0;
+		margin: 0 0 1em 0;
 		width: 100%;
 	}
 
@@ -2773,11 +2774,11 @@ input, select, textarea {
 			}
 
 		table td {
-			padding: 0.75em 0.75em;
+			padding: 0.25em 0.25em;
 		}
 
 		table th {
-			color: #ffffff;
+			color: #1c1d26;
 			font-size: 0.9em;
 			font-weight: 300;
 			padding: 0 0.75em 0.75em 0.75em;
@@ -3452,7 +3453,7 @@ input, select, textarea {
 	#banner {
 		background-attachment: fixed;
 		background-color: #272833;
-		background-image: url("../../images/banner.jpg");
+		background-image: url("../../images/koc-bckgrd.jpg");
 		background-position: center center;
 		background-size: cover;
 		box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25);
@@ -3471,10 +3472,10 @@ input, select, textarea {
 		}
 
 		#banner:after {
-			background-image: -moz-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
-			background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
-			background-image: -ms-linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
-			background-image: linear-gradient(top, rgba(23, 24, 32, 0.95), rgba(23, 24, 32, 0.95)), url("images/overlay.png");;
+			background-image: -moz-linear-gradient(top,  #ffffff, #ffffff), url("images/overlay.png");;
+			background-image: -webkit-linear-gradient(top,#ffffff, #ffffff), url("images/overlay.png");;
+			background-image: -ms-linear-gradient(top,#ffffff, #ffffff), url("images/overlay.png");;
+			background-image: linear-gradient(top,#ffffff, #ffffff), url("images/overlay.png");;
 			content: '';
 			display: block;
 			height: 100%;
@@ -3555,7 +3556,7 @@ input, select, textarea {
 			}
 
 			#footer .icons .icon.alt:before {
-				color: #272833 !important;
+				color: #ffffff !important;
 				text-shadow: 1px 0 0 rgba(255, 255, 255, 0.5), -1px 0 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.5), 0 -1px 0 rgba(255, 255, 255, 0.5);
 			}
 
@@ -3674,7 +3675,7 @@ input, select, textarea {
 				}
 
 				.spotlight .content {
-					background-color: #1c1d26;
+					background-color: #ffffff;
 					border-width: 0 !important;
 					border-top-width: 0.35em !important;
 					bottom: auto !important;
@@ -3808,7 +3809,7 @@ input, select, textarea {
 		/* Spotlight */
 
 			.spotlight {
-				box-shadow: 0 0.125em 0.5em 0 rgba(0, 0, 0, 0.25);
+				box-shadow: 0 0.125em 0.5em 0 #ffffff;
 			}
 
 				.spotlight .image.main {
@@ -3965,7 +3966,7 @@ input, select, textarea {
 				top: 0;
 				width: 275px;
 				z-index: 10002;
-				background: #181920;
+				background: #ffffff;
 				padding: 0.75em 1.25em;
 			}
 

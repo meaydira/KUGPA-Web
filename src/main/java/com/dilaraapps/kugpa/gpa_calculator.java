@@ -109,18 +109,18 @@ public class gpa_calculator implements GpaCalculator {
 
             page = webClient.getPage("https://kusis.ku.edu.tr/psp/ps/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSS_MY_CRSEHIST.GBL?FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HCCC_ACADEMIC_RECORDS.HC_SSS_MY_CRSEHIST_GBL&IsFolder=false&IgnoreParamTempl=FolderPath%2cIsFolder");
 
-            //TODO: ADD CUMULATIVE GPA TO PAGE
-            HtmlSpan cum_gpa = (HtmlSpan) page.getElementById("KU_AH_DERIVED_CUM_GPA");
+            //TODO: ADD CUMULATIVE GP//A TO PAGE
+           // HtmlSpan cum_gpa = (HtmlSpan) page.getElementById("KU_AH_DERIVED_CUM_GPA");
             HtmlPage framePage = (HtmlPage) page.getFrameByName("TargetContent").getEnclosedPage();
-            HtmlSpan a = (HtmlSpan) framePage.getByXPath("//span[contains(@id, 'KU_AH_DERIVED_CUM_GPA')]").get(0);
+           // HtmlSpan a = (HtmlSpan) cum_gpa.getByXPath("//span[contains(@id, 'KU_AH_DERIVED_CUM_GPA')]").get(0);
 
 
             System.out.println(page.asText());
 
-            stu = new Student(userid, Float.parseFloat(a.asText()));
+            stu = new Student(userid, Float.parseFloat("3.8"));
 
             HtmlSpan nameSpan = (HtmlSpan) framePage.getByXPath("//span[contains(@id, 'DERIVED_SSTSNAV_PERSON_NAME')]").get(0);
-            stu.setNameSurname(nameSpan.asText());
+            stu.setNameSurname("");
 
 
             for (int i = 0; i < framePage.getByXPath("//span[contains(@id, 'CRSE_NAME')]").size(); i++) {
@@ -136,13 +136,13 @@ public class gpa_calculator implements GpaCalculator {
             }
 
             stu.calculateGPA();
-            stu.setCumulativeGPA(Float.parseFloat(a.asText()));
+            stu.setCumulativeGPA(Float.parseFloat("3.8"));
 
 
             // ---------------------------------* WEEKLY SCHEDULE *-----------------------
 
 
-            HtmlPage confirmed = (HtmlPage) webClient.getPage("https://kusis.ku.edu.tr/psc/ps/EMPLOYEE/SA/c/SSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL?FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HCCC_PE_STUDENT.HC_SSR_SS_MY_CLASSES&amp;IsFolder=false&amp;IgnoreParamTempl=FolderPath%2cIsFolder&amp;PortalActualURL=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2fEMPLOYEE%2fSA%2fc%2fSSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL&amp;PortalContentURL=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2fEMPLOYEE%2fSA%2fc%2fSSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL&amp;PortalContentProvider=SA&amp;PortalCRefLabel=My%20Confirmed%20Enrollments&amp;PortalRegistryName=EMPLOYEE&amp;PortalServletURI=https%3a%2f%2fkusis.ku.edu.tr%2fpsp%2fps%2f&amp;PortalURI=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2f&amp;PortalHostNode=SA&amp;NoCrumbs=yes&amp;PortalKeyStruct=yes");
+     /*       HtmlPage confirmed = (HtmlPage) webClient.getPage("https://kusis.ku.edu.tr/psc/ps/EMPLOYEE/SA/c/SSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL?FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HCCC_PE_STUDENT.HC_SSR_SS_MY_CLASSES&amp;IsFolder=false&amp;IgnoreParamTempl=FolderPath%2cIsFolder&amp;PortalActualURL=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2fEMPLOYEE%2fSA%2fc%2fSSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL&amp;PortalContentURL=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2fEMPLOYEE%2fSA%2fc%2fSSR_PROG_ENRL_SS.SSR_SS_MY_CLASSES.GBL&amp;PortalContentProvider=SA&amp;PortalCRefLabel=My%20Confirmed%20Enrollments&amp;PortalRegistryName=EMPLOYEE&amp;PortalServletURI=https%3a%2f%2fkusis.ku.edu.tr%2fpsp%2fps%2f&amp;PortalURI=https%3a%2f%2fkusis.ku.edu.tr%2fpsc%2fps%2f&amp;PortalHostNode=SA&amp;NoCrumbs=yes&amp;PortalKeyStruct=yes");
 
             for (int i = 0; i < confirmed.getByXPath("//div[contains(@id, 'win0divDERIVED_REGFRM1_ }DESCR20$')]").size(); i++) {
                 HtmlDivision div = (HtmlDivision) confirmed.getByXPath("//div[contains(@id, 'win0divDERIVED_REGFRM1_DESCR20$')]").get(i);
@@ -184,7 +184,7 @@ public class gpa_calculator implements GpaCalculator {
 
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }  */
 
 
         } catch (final FailingHttpStatusCodeException e) {
