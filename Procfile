@@ -1,1 +1,1 @@
-web: java -jar /out/artifacts/kugpa_jar/kugpa.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/*.jar
